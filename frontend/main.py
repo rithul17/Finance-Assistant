@@ -4,7 +4,6 @@ import base64
 from io import BytesIO
 
 st.title("Agentic Finance Assistant")
-st.set_page_config(page_title="Financial Analysis", page_icon="📈")
 
 audio_file = st.audio_input("Record your market briefing")
 
