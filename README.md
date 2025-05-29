@@ -16,6 +16,25 @@ This system transforms spoken financial queries into actionable insights through
                 [Pinecone Vector Database]
 ```
 
+
+# SETUP 
+- cd frontend 
+- streamlit run main.py
+
+- cd backend  
+- uvicorn main:app --reload 
+
+Now streamlit frontend and backend are running.
+
+- cd backend/
+- nvim .env
+- specify the environment variables 
+**if you want to use groq for faster inference**
+GROQ_API_KEY=your_groq_api_key_here
+MODEL=groq/llama-3.3-70b-versatile
+LITELLM_PROVIDER=groq
+
+
 ### Agent Workflow
 1. **Query Analysis Agent**: Extracts stock tickers and financial entities from user queries
 2. **API Agent**: Retrieves real-time data from Yahoo Finance API
@@ -55,7 +74,6 @@ This system transforms spoken financial queries into actionable insights through
 
 - Python 3.8+
 - Groq API key
-- Pinecone API key
 - Yahoo Finance API access
 - Docker (for containerized deployment)
 
