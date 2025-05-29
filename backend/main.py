@@ -9,7 +9,7 @@ import sys
 
 #to import from agents 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from agents.crew import CrewAgent
+from backend.agents.crew import CrewAgent
 from fastapi.middleware.cors import CORSMiddleware
 
 #function to use tts
