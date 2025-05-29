@@ -1,0 +1,96 @@
+query_analysis_task:
+  description: >
+    Analyze the following user query and identify the relevant public company or companies.
+    Respond with the correct stock ticker symbol(s) that represent the target of the query.
+    The response must contain only valid stock ticker(s) usable with the Yahoo Finance API.
+    Query: {input_text}
+  expected_output: >
+    A comma-separated list of stock ticker symbols. Examples: AAPL, TSLA, MSFT.
+    Do not include explanations, just the tickers.
+  agent: query_analysis_agent
+
+data_collection_task:
+  description: >
+    You have received a list of stock ticker symbols from the previous 'Query Analysis Task'.
+    Your task is to retrieve the latest financial data for these provided stock ticker(s).
+    Fetch real-time market data including stock prices, sector performance, portfolio allocations, 
+    and relevant financial metrics. Use your tools to get this data.
+    Store the collected data in the vector database with proper metadata tags for efficient retrieval.
+    The ticker symbols to process are the direct output from the 'Query Analysis Task'.
+  expected_output: >
+    Confirmation of successful data collection with details such as:
+    "Collected market data for 15 Asia tech stocks. Retrieved portfolio allocation data 
+    showing current positions and daily changes. Stored 45 data chunks in vector database 
+    with timestamps and source metadata."
+  agent: api_agent
+
+document_scraping_task:
+  description: >
+    Based on the user query: {input_text}
+    Identify relevant companies and sectors mentioned in the query.
+    Scrape recent earnings reports, SEC filings, and financial news articles.
+    Extract earnings surprises, guidance updates, and analyst commentary.
+    Process and chunk the documents before storing in vector database.
+
+  expected_output: >
+    Summary of scraped documents with key findings such as:
+    "Scraped 8 earnings reports and 12 news articles for Asia tech companies. 
+    Identified 3 earnings surprises: TSMC beat by 4%, Samsung missed by 2%, 
+    ASML in-line. Stored 67 document chunks with earnings and sentiment metadata."
+
+  agent: scraping_agent
+
+context_retrieval_task:
+  description: >
+    Using the user query: {input_text}
+    Search the vector database for relevant financial context and data.
+    Apply similarity scoring and retrieve only high-confidence matches above the threshold.
+    If insufficient high-confidence results are found, trigger fallback mechanism.
+    Organize retrieved information by relevance and data type.
+    Return the actual retrieved text content for analysis.
+
+  expected_output: >
+    Retrieved text content and confidence assessment such as:
+    "RETRIEVED CONTENT:
+    Portfolio allocation: Asia tech 18% yesterday, current positions show increased exposure.
+    TSMC Q4 earnings: Revenue $18.9B vs $18.1B expected, EPS $1.32 vs $1.26 expected.
+    Samsung guidance: Lowered FY2024 targets, semiconductor division challenges.
+    
+    CONFIDENCE: HIGH (avg similarity: 0.84) - 5 chunks retrieved successfully."
+
+  agent: retriever_agent
+
+quantitative_analysis_task:
+  description: >
+    Analyze the retrieved financial data from the previous task output.
+    Calculate portfolio allocation percentages, sector exposure, and daily changes.
+    Compute earnings surprise ratios and their statistical significance.
+    Assess risk metrics and regional sentiment indicators.
+    Prepare quantitative findings for narrative synthesis.
+
+  expected_output: >
+    Structured analysis results such as:
+    "QUANTITATIVE ANALYSIS:
+    Portfolio Metrics: Asia tech allocation 22% of AUM (up from 18% yesterday, +4pp change).
+    Earnings Analysis: TSMC +4.0% surprise ratio, Samsung -2.1% miss, sector avg +1.2%.
+    Risk Assessment: Increased concentration risk, beta 1.15 vs market.
+    Sentiment Score: Neutral (0.52) with rising yield concerns."
+
+  agent: analysis_agent
+
+narrative_synthesis_task:
+  description: >
+    Transform the quantitative analysis into a clear, verbal-style response.
+    Create a concise 30-50 word summary suitable for voice delivery.
+    Include specific portfolio allocation percentages and changes.
+    Highlight key earnings surprises with company names and percentages.
+    Conclude with a brief sentiment assessment.
+
+  expected_output: >
+    A 2-3 sentence professional verbal summary such as:
+    "Today, your Asia tech allocation is 22% of AUM, up from 18% yesterday. 
+    TSMC beat estimates by 4%, Samsung missed by 2%. Regional sentiment is 
+    neutral with a cautionary tilt due to rising yields."
+
+  agent: language_agent
+
