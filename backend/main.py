@@ -80,8 +80,3 @@ async def process_audio(file: UploadFile = File(...)):
         "audio_base64": audio_b64,
         "final_text": final_text
         })
-
-
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy", "service": "financial-analysis-backend"}
