@@ -14,6 +14,10 @@ This system transforms spoken financial queries into actionable insights through
 
 ##  Installation & Setup
 
+**USE PYTHON VERSION 3.10.13**
+**pyenv install 3.10.13**
+**pyenv local 3.10.13**
+
 1. **Clone the repository**
 ```bash
 git clone <your-repo-url>
