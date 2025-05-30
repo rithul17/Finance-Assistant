@@ -27,7 +27,7 @@ async def startup_event():
 
     st_msg = "Loading Whisper model..."
     print(st_msg)
-    whisper_model = whisper.load_model("tiny")
+    whisper_model = whisper.load_model("base")
     print("Whisper loaded.")
 
 

@@ -12,7 +12,7 @@ if audio_file is not None:
     files = {"file": ("recording.wav", audio_file, "audio/wav")}
 
     try:
-        response = requests.post("http://localhost:8000/process_audio", files=files)
+        response = requests.post("http://localhost:8001/process_audio", files=files)
     except Exception as e:
         st.error(f"Failed to connect to the backend: {e}")
     else:
