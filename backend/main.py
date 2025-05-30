@@ -9,8 +9,7 @@ import sys
 
 #to import from agents 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from backend.agents.crew import CrewAgent
-from fastapi.middleware.cors import CORSMiddleware
+from agents.crew import CrewAgent
 
 #function to use tts
 async def tts_to_file(text: str, file_path: str, speed: float = 1.0, voice: str = "en-US-GuyNeural"):
@@ -21,14 +20,7 @@ async def tts_to_file(text: str, file_path: str, speed: float = 1.0, voice: str 
     await communicate.save(file_path)
 
 app = FastAPI()
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["https://your-streamlit-app.streamlit.app"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-#Initializing
+
 @app.on_event("startup")
 async def startup_event():
     global whisper_model, crew_agent
