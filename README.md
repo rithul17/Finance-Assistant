@@ -2,34 +2,50 @@
 
 A comprehensive voice-to-voice financial analysis system that processes audio queries, performs multi-agent analysis using CrewAI, and returns synthesized audio responses with real-time stock market insights.
 
-## 🎯 Overview
+## Overview
 
 This system transforms spoken financial queries into actionable insights through a sophisticated pipeline combining speech recognition, multi-agent AI analysis, and text-to-speech synthesis. Users can ask questions about stocks, market trends, or specific companies and receive comprehensive audio responses in approximately 4 seconds.
 
-## 🏗️ Architecture
+## Architecture
 
 ```
-[User Audio Input] → [Streamlit Frontend]-> [FastAPI Backend]->
-[Whisper STT] → [CrewAI Multi-Agent System] → [Edge TTS] → [Audio Response]
+[User Audio Input] → [Streamlit Frontend]-> [FastAPI Backend]-> [Whisper STT] → [CrewAI Multi-Agent System] → [Edge TTS] → [Audio Response]
 ```
 
+##  Installation & Setup
 
-# SETUP 
-- cd frontend 
-- streamlit run main.py
+1. **Clone the repository**
+```bash
+git clone <your-repo-url>
+cd Finance-Assistant
+```
 
-- cd backend  
-- uvicorn main:app --reload 
+2. **Install dependencies**
+```bash
+pip install -r requirements.txt
+```
 
-Now streamlit frontend and backend are running.
+3. **Environment Configuration**
+use groq for faster inference
+Create a `.env` file in the root directory:
+```env
+GROQ_API_KEY=your_groq_api_key_here
+MODEL=groq/llama-3.3-70b-versatile
+LITELLM_PROVIDER=groq
+```
 
-- cd backend/
-- nvim .env
-- specify the environment variables 
-### **if you want to use groq for faster inference**
-### GROQ_API_KEY=your_groq_api_key_here
-### MODEL=groq/llama-3.3-70b-versatile
-### LITELLM_PROVIDER=groq
+4. **Start the Backend**
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+5. **Start the Frontend**
+```bash
+streamlit run app.py --server.port 8501
+```
+
+6. **Access the Application**
+Open your browser to `http://localhost:8501`
 
 ### Agent Workflow
 1. **Query Analysis Agent**: Extracts stock tickers and financial entities from user queries
@@ -49,7 +65,7 @@ Now streamlit frontend and backend are running.
 - **Low Latency**: ~4 second average response time
 - **Natural Language Output**: Conversational audio responses
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 - **Streamlit**: Interactive web interface with audio recording capabilities
@@ -66,78 +82,14 @@ Now streamlit frontend and backend are running.
 - **Beautiful Soup**: Web scraping for news data
 - **Yahoo Finance API**: Real-time market data
 
-## 📋 Prerequisites
+##  Prerequisites
 
 - Python 3.8+
 - Groq API key
 - Yahoo Finance API access
 - Docker (for containerized deployment)
 
-## 🔧 Installation & Setup
-
-### Local Development
-
-1. **Clone the repository**
-```bash
-git clone <your-repo-url>
-cd financial-analysis-system
 ```
-
-2. **Install dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-3. **Environment Configuration**
-Create a `.env` file in the root directory:
-```env
-GROQ_API_KEY=your_groq_api_key_here
-PINECONE_API_KEY=your_pinecone_api_key_here
-PINECONE_ENVIRONMENT=your_pinecone_environment
-PINECONE_INDEX_NAME=financial-analysis
-```
-
-4. **Initialize Pinecone Index**
-```python
-# Run this once to set up your vector database
-python scripts/init_pinecone.py
-```
-
-5. **Start the Backend**
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-6. **Start the Frontend**
-```bash
-streamlit run app.py --server.port 8501
-```
-
-7. **Access the Application**
-Open your browser to `http://localhost:8501`
-
-### Docker Deployment
-
-1. **Build the Docker Image**
-```bash
-docker build -t your-username/financial-analysis-system .
-```
-
-2. **Run the Container**
-```bash
-docker run -p 8501:8501 -p 8000:8000 \
-  -e GROQ_API_KEY=your_key \
-  -e PINECONE_API_KEY=your_key \
-  -e PINECONE_ENVIRONMENT=your_env \
-  your-username/financial-analysis-system
-```
-
-3. **Push to Docker Hub**
-```bash
-docker tag your-username/financial-analysis-system your-username/financial-analysis-system:latest
-docker push your-username/financial-analysis-system:latest
-```
-
 ```
 
 ## 🎛️ Configuration
