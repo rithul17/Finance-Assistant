@@ -5,4 +5,4 @@ edge-tts
 pyyaml
 crewai
 python-dotenv
-
+python-multipart
