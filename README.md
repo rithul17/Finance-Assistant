@@ -36,12 +36,15 @@ LITELLM_PROVIDER=groq
 
 4. **Start the Backend**
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
+cd backend/
+uvicorn main:app --host 0.0.0.0 --port 8000 
 ```
 
 5. **Start the Frontend**
 ```bash
+cd frontend/
 streamlit run app.py --server.port 8501
+
 ```
 
 6. **Access the Application**
