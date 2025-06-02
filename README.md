@@ -2,10 +2,6 @@
 
 A comprehensive voice-to-voice financial analysis system that processes audio queries, performs multi-agent analysis using CrewAI, and returns synthesized audio responses with real-time stock market insights.
 
-## Overview
-
-This system transforms spoken financial queries into actionable insights through a sophisticated pipeline combining speech recognition, multi-agent AI analysis, and text-to-speech synthesis. Users can ask questions about stocks, market trends, or specific companies and receive comprehensive audio responses in approximately 4 seconds.
-
 ## Architecture
 
 ```
@@ -20,7 +16,7 @@ This system transforms spoken financial queries into actionable insights through
 
 1. **Clone the repository**
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/rithul17/Finance-Assistant
 cd Finance-Assistant
 ```
 
@@ -59,7 +55,7 @@ Open your browser to `http://localhost:8501`
 5. **Analysis Agent**: Synthesizes all data sources into coherent financial insights
 6. **Language Agent**: Converts analysis into concise 4-5 sentence summaries
 
-## 🚀 Features
+##  Features
 
 - **Voice-to-Voice Interface**: Complete hands-free interaction
 - **Real-time Market Data**: Integration with Yahoo Finance API
@@ -91,24 +87,10 @@ Open your browser to `http://localhost:8501`
 - Python 3.8+
 - Groq API key
 - Yahoo Finance API access
-- Docker (for containerized deployment)
 
 ```
 ```
-
-## 🎛️ Configuration
-
-### Model Settings
-- **Speech Recognition**: Whisper Base model
-- **LLM**: Groq Llama-3.3-70B-Versatile
-- **TTS Voice**: en-US-GuyNeural
-- **Audio Format**: WAV, 16kHz sample rate
-
-### Performance Tuning
-- Modify vector similarity thresholds
-- Configure agent execution timeouts
-
-## 🚀 Future Enhancements
+##  Future Enhancements
 
 ### Planned Features
 - **Advanced Web Scraping**: Migration to Hyperbrowser or Firecrawl for faster multi-site scraping
@@ -116,34 +98,3 @@ Open your browser to `http://localhost:8501`
 - **Authentication**: User management and API key security
 - **Caching**: Redis integration for frequently requested data
 - **Multi-language Support**: Additional TTS voices and languages
-
-### Scalability Improvements
-- Kubernetes deployment configurations
-- Load balancing for high-traffic scenarios
-- Database connection pooling
-- Asynchronous agent execution
-
-## 📊 Performance Metrics
-
-- **Average Response Time**: ~4 seconds
-- **Audio Processing**: <1 second (Whisper Base)
-- **Agent Execution**: ~2 seconds
-- **TTS Generation**: <1 second
-- **Supported Audio Formats**: WAV (primary), MP3, M4A
-- **Concurrent Users**: Up to 10 (single instance)
-
-## 🛡️ Security Considerations
-
-- API keys stored in environment variables
-- No user authentication currently implemented
-- Audio data not persisted after processing
-- Rate limiting recommended for production use
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
