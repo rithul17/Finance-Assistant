@@ -88,8 +88,6 @@ Open your browser to `http://localhost:8501`
 - Groq API key
 - Yahoo Finance API access
 
-```
-```
 ##  Future Enhancements
 
 ### Planned Features
